@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jdenticon Generator</title>
+
+</head>
+
+<body>
+    <canvas id="jcon" width="400" height="400" data-jdenticon-value="akashvekariya"></canvas>
+    <script>
+        let params = new URLSearchParams(window.location.search);
+        let hash = params.get('hash');
+        var jconElement = document.getElementById("jcon");
+
+        if (hash === undefined) {
+            jconElement.setAttribute("data-jdenticon-value", "default");
+        } else {
+            jconElement.setAttribute("data-jdenticon-value", hash);
+        }
+
+        // https://jdenticon.com/icon-designer.html?config=ffffffff014156641c490e2e
+        window.jdenticon_config = {
+            lightness: {
+                color: [0.28, 0.73],
+                grayscale: [0.14, 0.46]
+            },
+            saturation: {
+                color: 0.86,
+                grayscale: 1.00
+            },
+            backColor: "#fff"
+        };
+
+        window.onload = function () {
+            var base64image = jconElement.toDataURL("image/png");
+            console.log(base64image);
+            window.location.href = base64image;
+            var img = document.createElement("img");
+            img.src = base64image;
+            document.body.replaceWith(img);
+        }
+    </script>
+
+    <script src="./assets/js/jdenticon.min.js"></script>
+</body>
+
+</html>
